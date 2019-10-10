@@ -1,7 +1,7 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-if(empty($units)){
+if (empty($units)) {
     show_error("Required data 'units' is not declared.");
 }
 ?>
@@ -30,7 +30,7 @@ if(empty($units)){
         <h2>Information</h2>
         <h3>データ情報</h3>
         <p>
-            データベース更新：<?= hsc(ConvertDateString(config_item('db_last_modified'),'ja_year')) ?>
+            データベース更新：<?= hsc(ConvertDateString(config_item('db_last_modified'), 'ja_year')) ?>
         </p>
         <h3>システム情報</h3>
         <p>
@@ -46,22 +46,21 @@ if(empty($units)){
         <p>
             ShinyColorsPortalへようこそ。ShinyColorsPortalは、アイドル・ユニットの情報を提供する非公式データベース・ポータルサイトです。
         </p>
-        <?php if(!empty($birthday)){
-
-            ?>
+        <?php if (!empty($birthday)) {
+    ?>
             <h3>HappyBirthday!</h3>
                 <p>本日<?= date('n月j日') ?>がお誕生日のアイドルです。Happy Birthday!</p>
-            <?php foreach ($birthday as $idol){
-                ?>
+            <?php foreach ($birthday as $idol) {
+        ?>
                 <div class="idol button">
                     <a href="<?= config_item('root_url')."idol/detail/".hsc($idol->name_r) ?>">
                         <img src="<?= config_item('resource_root') ?>image/character/<?= hsc($idol->name_r) ?>/icon.jpg" alt="" class="idolicon">
                     </a>
-                    <a href="<?= config_item('root_url')."idol/detail/".hsc($idol->name_r) ?>" class="idolname"><?= hsc(SeparateString($idol->name,$idol->name_separate)) ?></a>
+                    <a href="<?= config_item('root_url')."idol/detail/".hsc($idol->name_r) ?>" class="idolname"><?= hsc(SeparateString($idol->name, $idol->name_separate)) ?></a>
                     <table>
                         <tr>
                             <th>ユニット</th><td style="min-width: 125px"><?= hsc($units[$idol->unit_id - 1]->name) ?></td>
-                            <th>誕生日</th><td><?= ConvertDateString($idol->birthdate,'ja') ?></td>
+                            <th>誕生日</th><td><?= ConvertDateString($idol->birthdate, 'ja') ?></td>
                             <th>年齢</th><td><?= hsc($idol->age) ?>歳</td>
                             <th>星座</th><td><?= hsc($idol->constellation) ?></td>
                             <th>CV</th><td><?= hsc($idol->cv) ?></td>
@@ -69,8 +68,8 @@ if(empty($units)){
                     </table>
                 </div>
                 <?php
-            }
-        } ?>
+    }
+} ?>
         <h3>Menu</h3>
         <div class="buttonbox">
             <a href="<?= config_item('root_url') ?>idol" class="button il half">
@@ -100,13 +99,15 @@ if(empty($units)){
             <?php
             $url = "https://mstdn.miyacorata.net/@283pro.rss";
             $feed = simplexml_load_file($url);
-            if($feed){
-                foreach ($feed->channel->item as $entry){
-                    if(mb_strpos($entry->description,"(承前)"))continue;
-                    echo "<h4>".date("Y年n月j日 H:i",strtotime($entry->pubDate) + (60 * 60 * 9 * 0))."配信 - <a href=\"".$entry->link."\" target=\"_blank\">Mastodonで見る</a></h4>".PHP_EOL;
+            if ($feed) {
+                foreach ($feed->channel->item as $entry) {
+                    if (mb_strpos($entry->description, "(承前)")) {
+                        continue;
+                    }
+                    echo "<h4>".date("Y年n月j日 H:i", strtotime($entry->pubDate) + (60 * 60 * 9 * 0))."配信 - <a href=\"".$entry->link."\" target=\"_blank\">Mastodonで見る</a></h4>".PHP_EOL;
                     echo $entry->description.PHP_EOL;
                 }
-            }else{
+            } else {
                 ?>
                 <p style="padding-top: 80px;text-align: center">
                     <img src="<?= config_item('resource_root') ?>image/283.png" alt="" style="width: 150px"><br>
