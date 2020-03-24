@@ -1,13 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $share_text = "ShinyColorsPortal ".GetCurrentUrl()." %23283pro_net";
-if(!empty($title))$share_text = $title." - ".$share_text;
+if (!empty($title)) {
+    $share_text = $title." - ".$share_text;
+}
 ?>
 <!doctype html>
 <html lang="ja">
 <head>
-    <?php if(ENVIRONMENT === "production"){ ?>
+    <?php if (ENVIRONMENT === "production") {
+    ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= config_item('ga_token') ?>"></script>
     <script>
@@ -17,14 +20,17 @@ if(!empty($title))$share_text = $title." - ".$share_text;
 
         gtag('config', '<?= config_item('ga_token') ?>');
     </script>
-    <?php } ?>
-    <title><?php if(!empty($title))echo $title." - "; ?>ShinyColorsPortal</title>
+    <?php
+} ?>
+    <title><?php if (!empty($title)) {
+        echo $title." - ";
+    } ?>ShinyColorsPortal</title>
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3">
     <link rel="stylesheet" href="<?= config_item('resource_root') ?>css/style.css">
     <link rel="stylesheet" href="<?= config_item('resource_root') ?>css/mobile/style.css" media="screen and (max-width:1200px)">
-    <?php if(!empty($load_css) && is_array($load_css)){
-        foreach ($load_css as $css){
+    <?php if (!empty($load_css) && is_array($load_css)) {
+        foreach ($load_css as $css) {
             $css_m = config_item('resource_root')."css/mobile/".$css.".css";
             $css = config_item('resource_root')."css/".$css.".css";
             echo "<link rel='stylesheet' href='{$css}' media='screen'>".PHP_EOL."<link rel='stylesheet' href='{$css_m}' media='screen and (max-width:1330px)'>".PHP_EOL;
@@ -73,15 +79,15 @@ if(!empty($title))$share_text = $title." - ".$share_text;
 </header>
 
 <?php
-if(ENVIRONMENT === "development"){
-    ?>
+if (ENVIRONMENT === "development") {
+        ?>
     <p style="margin: 0;padding: 7px;background: orange;text-align: center">
         DEVELOPMENT環境で動作中
     </p>
     <?php
-}
+    }
 
-if(date("md")==="1225"){
+if (date("md")==="1225") {
     ?>
     <p style="margin: 0;padding: 7px;background: linear-gradient(darkred,red);color: white;text-align: center;text-shadow: 0 0 4px rgba(0,0,0,0.7);">
         Merry Christmas!

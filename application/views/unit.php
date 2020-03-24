@@ -1,24 +1,24 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-if(empty($unit)){
+if (empty($unit)) {
     show_error("Required data 'unit' is not declared.");
 }
-if(empty($member)){
+if (empty($member)) {
     show_error("Required data 'member' is not declared.");
-}elseif(!is_array($member)){
+} elseif (!is_array($member)) {
     show_error("Data 'member' format is incorrect.");
 }
 
-$choiced_member = $member[mt_rand(0,count($member)-1)]->name_r;
-$mainname = preg_match('/^([a-zA-Z0-9 \']+)$/',$unit->name) ? $unit->name_y : $unit->name;
+$choiced_member = $member[mt_rand(0, count($member)-1)]->name_r;
+$mainname = preg_match('/^([a-zA-Z0-9 \']+)$/', $unit->name) ? $unit->name_y : $unit->name;
 $urlname = urlencode($mainname);
 
 /* ##### 邪悪コード ##### */
-if($unit->name === "ALSTROEMERIA"){
+if ($unit->name === "ALSTROEMERIA") {
     $urlname = $unit->name;
     $nicodic_suffix = urlencode("(アイドルマスター)");
-}else{
+} else {
     $nicodic_suffix = "";
 }
 
@@ -51,14 +51,14 @@ if($unit->name === "ALSTROEMERIA"){
         <p><?= hsc($unit->description) ?></p>
         <h3>メンバー</h3>
         <div style="text-align: center">
-            <?php foreach ($member as $m){
-                ?>
+            <?php foreach ($member as $m) {
+    ?>
                 <a class="member" href="<?= config_item('root_url') ?>idol/detail/<?= hsc($m->name_r) ?>">
                     <img src="<?= config_item('resource_root') ?>image/character/<?= hsc($m->name_r) ?>/icon.jpg" alt="<?= hsc($m->name_r) ?>">
-                    <?= hsc(SeparateString($m->name,$m->name_separate)) ?>
+                    <?= hsc(SeparateString($m->name, $m->name_separate)) ?>
                 </a>
                 <?php
-            }
+}
             ?>
         </div>
 
@@ -69,7 +69,7 @@ if($unit->name === "ALSTROEMERIA"){
         <h2>Information</h2>
         <h3>データ情報</h3>
         <p>
-            データベース更新：<?= hsc(ConvertDateString(config_item('db_last_modified'),'ja_year')) ?>
+            データベース更新：<?= hsc(ConvertDateString(config_item('db_last_modified'), 'ja_year')) ?>
         </p>
     </div>
     <div id="mainbar">
